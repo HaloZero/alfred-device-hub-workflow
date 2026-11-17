@@ -7,16 +7,13 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "lib"))
 import common
 
-CONFIG_PATH = os.path.join(os.path.dirname(__file__), "..", "config", "apps.json")
-
 
 def main():
     try:
-        with open(CONFIG_PATH) as f:
-            apps = json.load(f)
-    except (OSError, json.JSONDecodeError) as exc:
+        apps = json.loads(os.environ.get("apps_config") or "[]")
+    except json.JSONDecodeError as exc:
         common.alfred_items([common.info_item(
-            "Couldn't read config/apps.json",
+            "apps_config variable isn't valid JSON",
             str(exc),
         )])
         return
@@ -24,7 +21,7 @@ def main():
     if not apps:
         common.alfred_items([common.info_item(
             "No apps configured",
-            "Add entries to config/apps.json: name, bundle_id, path (optional).",
+            "Set the apps_config workflow variable: [{name, bundle_id, path}, ...]",
         )])
         return
 

@@ -86,19 +86,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>A902489D-F874-4BF1-B704-86C8FE579A0D</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>41D7671C-7571-47B2-B20D-D46007233691</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Rohan Dhaimade</string>
@@ -460,72 +447,6 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>keyword</key>
-				<string>simupdate</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<false/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>Checking GitHub for updates…</string>
-				<key>script</key>
-				<string>/usr/bin/python3 update/check_update.py</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>subtext</key>
-				<string>Check GitHub for a newer release of this workflow</string>
-				<key>title</key>
-				<string>Check for Updates</string>
-				<key>type</key>
-				<integer>0</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>A902489D-F874-4BF1-B704-86C8FE579A0D</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string>bash update/install_update.sh</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>41D7671C-7571-47B2-B20D-D46007233691</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Device Hub — control iOS Simulators from Alfred.
@@ -535,9 +456,12 @@ Keywords:
   simopen    Boot and focus an existing simulator
   simapp     Install/launch a configured app on currently booted simulator(s)
   simlink    Open a deep link (configured or typed) on currently booted simulator(s)
-  simupdate  Check this repo's GitHub releases for a newer version and install it
 
-Edit config/apps.json and config/deeplinks.json to add your own apps and links.</string>
+Edit the apps_config and deeplinks_config workflow variables (the {}/Variables
+tab in this workflow's editor) to configure your own apps and deep links.
+
+This workflow updates itself via Alfred's built-in GitHub updater — Alfred
+checks this repo's releases automatically.</string>
 	<key>uidata</key>
 	<dict>
 		<key>704DBE86-B484-4C2E-905A-E73DA62D9133</key>
@@ -610,25 +534,16 @@ Edit config/apps.json and config/deeplinks.json to add your own apps and links.<
 			<key>ypos</key>
 			<integer>380</integer>
 		</dict>
-		<key>A902489D-F874-4BF1-B704-86C8FE579A0D</key>
-		<dict>
-			<key>xpos</key>
-			<integer>40</integer>
-			<key>ypos</key>
-			<integer>500</integer>
-		</dict>
-		<key>41D7671C-7571-47B2-B20D-D46007233691</key>
-		<dict>
-			<key>xpos</key>
-			<integer>260</integer>
-			<key>ypos</key>
-			<integer>500</integer>
-		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
 	<array/>
 	<key>variables</key>
-	<dict/>
+	<dict>
+		<key>apps_config</key>
+		<string>[{"name":"Example App (Debug)","bundle_id":"com.example.app.debug","path":"/path/to/Example.app"}]</string>
+		<key>deeplinks_config</key>
+		<string>[{"name":"Home","url":"example://home"},{"name":"Settings","url":"example://settings"}]</string>
+	</dict>
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>

@@ -1,8 +1,7 @@
 # alfred-device-hub-workflow
 
 Control iOS Simulators from Alfred — create, open, install/launch apps, and fire
-deep links at whichever simulators are currently booted. Updates itself from
-this GitHub repo's releases.
+deep links at whichever simulators are currently booted. 
 
 ## Keywords
 
@@ -10,21 +9,29 @@ this GitHub repo's releases.
 |-------------|------|
 | `simnew`    | Pick a device type + iOS version, creates and boots a new simulator |
 | `simopen`   | Pick any existing simulator, boots it (if needed) and brings it to front |
-| `simapp`    | Pick currently booted simulator(s) (or "All Booted"), then an app from `config/apps.json`, installs (if a path is set) and launches it |
-| `simlink`   | Pick currently booted simulator(s), then a deep link from `config/deeplinks.json` — or just type a full `scheme://...` URL — and opens it |
-| `simupdate` | Checks this repo's latest GitHub release against the installed version and installs it if newer |
+| `simapp`    | Pick currently booted simulator(s) (or "All Booted"), then an app from the `apps_config` workflow variable, installs (if a path is set) and launches it |
+| `simlink`   | Pick currently booted simulator(s), then a deep link from the `deeplinks_config` workflow variable — or just type a full `scheme://...` URL — and opens it |
 
 `simapp` and `simlink` only ever target simulators that are already booted —
 use `simopen` (or `simnew`) first to get one running.
 
 ## Configuring your apps and deep links
 
-Edit these two files and keep them in version control alongside the workflow:
+Open this workflow in Alfred's workflow editor, click the `[x]` (Workflow
+Variables) icon in the top toolbar, and edit two variables there — no files
+to touch, and the values survive workflow updates:
 
-- `config/apps.json` — `{ "name", "bundle_id", "path" }`. Leave `path` empty
-  (`""`) to just launch an app that's already installed on the simulator;
-  set it to a built `.app` bundle path to install it first.
-- `config/deeplinks.json` — `{ "name", "url" }`.
+- `apps_config` — JSON array of `{ "name", "bundle_id", "path" }`. Leave
+  `path` empty (`""`) to just launch an app that's already installed on the
+  simulator; set it to a built `.app` bundle path to install it first.
+  Example:
+  ```json
+  [{"name":"Whatnot (Debug)","bundle_id":"com.whatnot.app.debug","path":"/path/to/Whatnot.app"}]
+  ```
+- `deeplinks_config` — JSON array of `{ "name", "url" }`. Example:
+  ```json
+  [{"name":"Home","url":"whatnot://home"}]
+  ```
 
 ## Installing
 
@@ -37,9 +44,12 @@ Edit these two files and keep them in version control alongside the workflow:
 
 ## Releasing an update
 
-`simupdate` looks at `https://github.com/HaloZero/alfred-device-hub-workflow/releases/latest`
-for a release whose tag is newer than the installed `version` (set in `info.plist`)
-and that has a `.alfredworkflow` asset attached.
+Alfred has a built-in updater for workflows whose `info.plist` has a
+`webaddress` pointing at a GitHub repo (already set to this repo) and a
+`version` string. Alfred periodically checks that repo's releases itself —
+no custom command needed. When a newer release exists, Alfred shows an
+"Update Available" prompt for this workflow in Alfred Preferences →
+Workflows, and the user updates with one click there.
 
 To cut a release:
 
@@ -54,8 +64,8 @@ git push origin v1.1.0
 gh release create v1.1.0 dist/Device-Hub-1.1.0.alfredworkflow --title v1.1.0 --notes "..."
 ```
 
-Anyone running `simupdate` will then be offered that release and, on Enter,
-Alfred downloads and installs it.
+Workflow variables (`apps_config`, `deeplinks_config`) are preserved across
+updates — only the blueprint (keywords/scripts) gets replaced.
 
 ## Scripts
 

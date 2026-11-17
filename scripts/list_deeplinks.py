@@ -7,8 +7,6 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "lib"))
 import common
 
-CONFIG_PATH = os.path.join(os.path.dirname(__file__), "..", "config", "deeplinks.json")
-
 
 def main():
     query = sys.argv[1] if len(sys.argv) > 1 else ""
@@ -25,12 +23,11 @@ def main():
         })
 
     try:
-        with open(CONFIG_PATH) as f:
-            links = json.load(f)
-    except (OSError, json.JSONDecodeError) as exc:
+        links = json.loads(os.environ.get("deeplinks_config") or "[]")
+    except json.JSONDecodeError as exc:
         links = []
         if not items:
-            common.alfred_items([common.info_item("Couldn't read config/deeplinks.json", str(exc))])
+            common.alfred_items([common.info_item("deeplinks_config variable isn't valid JSON", str(exc))])
             return
 
     for link in links:
@@ -46,7 +43,7 @@ def main():
     if not items:
         items = [common.info_item(
             "No matching deep link",
-            "Type a full URL (scheme://...) to open it directly, or add one to config/deeplinks.json",
+            "Type a full URL (scheme://...) to open it directly, or add one to the deeplinks_config workflow variable",
         )]
 
     common.alfred_items(items)

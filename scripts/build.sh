@@ -16,8 +16,6 @@ rm -f "$out_file"
 zip -r "$out_file" \
   info.plist \
   scripts \
-  update \
-  config \
   -x '*.pyc' -x '__pycache__/*' -x '*/__pycache__/*'
 
 echo "Built $out_file"
