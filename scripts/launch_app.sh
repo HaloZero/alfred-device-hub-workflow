@@ -1,6 +1,6 @@
 #!/bin/bash
-# Run Script action for `simapp`. Installs (if a path was configured) and launches
-# the chosen app on the chosen target(s): a single udid, or "ALL" booted simulators.
+# Run Script action for `simapp`. Launches the chosen (already-installed) app
+# on the chosen target(s): a single udid, or "ALL" booted simulators.
 set -uo pipefail
 
 : "${target:?target not set}"
@@ -25,9 +25,6 @@ fi
 
 while IFS= read -r udid; do
   [[ -z "$udid" ]] && continue
-  if [[ -n "${app_path:-}" ]]; then
-    xcrun simctl install "$udid" "$app_path"
-  fi
   xcrun simctl launch "$udid" "$bundle_id"
 done <<< "$targets"
 

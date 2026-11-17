@@ -53,6 +53,40 @@ def list_booted_devices():
     return [d for d in list_devices() if d["state"] == "Booted"]
 
 
+def list_installed_apps(udid):
+    """Return [{name, bundle_id}] installed on the given simulator.
+
+    `simctl listapps` only emits the legacy OpenStep plist format (its -j
+    flag is ignored), so pipe through `plutil` to get JSON.
+    """
+    listapps = subprocess.run(
+        ["xcrun", "simctl", "listapps", udid],
+        capture_output=True, text=True,
+    )
+    if listapps.returncode != 0:
+        return []
+    convert = subprocess.run(
+        ["plutil", "-convert", "json", "-o", "-", "-"],
+        input=listapps.stdout, capture_output=True, text=True,
+    )
+    if convert.returncode != 0:
+        return []
+    try:
+        data = json.loads(convert.stdout)
+    except json.JSONDecodeError:
+        return []
+
+    apps = [
+        {
+            "name": info.get("CFBundleDisplayName") or info.get("CFBundleName") or bundle_id,
+            "bundle_id": bundle_id,
+        }
+        for bundle_id, info in data.items()
+    ]
+    apps.sort(key=lambda a: a["name"].lower())
+    return apps
+
+
 def alfred_items(items):
     sys.stdout.write(json.dumps({"items": items}))
 

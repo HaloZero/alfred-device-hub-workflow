@@ -257,7 +257,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>subtext</key>
-				<string>Install + launch an app on currently booted simulator(s)</string>
+				<string>Launch an app on currently booted simulator(s)</string>
 				<key>title</key>
 				<string>Open App</string>
 				<key>type</key>
@@ -454,7 +454,7 @@
 Keywords:
   simnew     Create a new simulator (pick device type + iOS version)
   simopen    Boot and focus an existing simulator
-  simapp     Install/launch a configured app on currently booted simulator(s)
+  simapp     Launch an installed app on currently booted simulator(s)
   simlink    Open a deep link (configured or typed) on currently booted simulator(s)
 
 Edit the apps_config and deeplinks_config workflow variables (the {}/Variables
@@ -536,11 +536,54 @@ checks this repo's releases automatically.</string>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>[]</string>
+				<key>placeholder</key>
+				<string>["Whatnot","Settings"]</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Optional JSON array of app names to shortlist for simapp. Bundle IDs are looked up automatically from whatever's installed on the simulator. Leave as [] to see every installed app instead.</string>
+			<key>label</key>
+			<string>Apps Shortlist (JSON)</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>apps_config</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>[{"name":"Home","url":"example://home"},{"name":"Settings","url":"example://settings"}]</string>
+				<key>placeholder</key>
+				<string>[{"name":"Home","url":"myapp://home"}]</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>JSON array of deep links for simlink: name and url.</string>
+			<key>label</key>
+			<string>Deep Links (JSON)</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>deeplinks_config</string>
+		</dict>
+	</array>
 	<key>variables</key>
 	<dict>
 		<key>apps_config</key>
-		<string>[{"name":"Example App (Debug)","bundle_id":"com.example.app.debug","path":"/path/to/Example.app"}]</string>
+		<string>[]</string>
 		<key>deeplinks_config</key>
 		<string>[{"name":"Home","url":"example://home"},{"name":"Settings","url":"example://settings"}]</string>
 	</dict>

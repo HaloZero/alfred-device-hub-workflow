@@ -15,6 +15,7 @@ rm -f "$out_file"
 
 zip -r "$out_file" \
   info.plist \
+  icon.png \
   scripts \
   -x '*.pyc' -x '__pycache__/*' -x '*/__pycache__/*'
 

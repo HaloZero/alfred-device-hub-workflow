@@ -9,7 +9,7 @@ deep links at whichever simulators are currently booted.
 |-------------|------|
 | `simnew`    | Pick a device type + iOS version, creates and boots a new simulator |
 | `simopen`   | Pick any existing simulator, boots it (if needed) and brings it to front |
-| `simapp`    | Pick currently booted simulator(s) (or "All Booted"), then an app from the `apps_config` workflow variable, installs (if a path is set) and launches it |
+| `simapp`    | Pick currently booted simulator(s) (or "All Booted"), then an installed app (optionally shortlisted via `apps_config`), and launches it |
 | `simlink`   | Pick currently booted simulator(s), then a deep link from the `deeplinks_config` workflow variable — or just type a full `scheme://...` URL — and opens it |
 
 `simapp` and `simlink` only ever target simulators that are already booted —
@@ -21,13 +21,11 @@ Open this workflow in Alfred's workflow editor, click the `[x]` (Workflow
 Variables) icon in the top toolbar, and edit two variables there — no files
 to touch, and the values survive workflow updates:
 
-- `apps_config` — JSON array of `{ "name", "bundle_id", "path" }`. Leave
-  `path` empty (`""`) to just launch an app that's already installed on the
-  simulator; set it to a built `.app` bundle path to install it first.
-  Example:
-  ```json
-  [{"name":"Whatnot (Debug)","bundle_id":"com.whatnot.app.debug","path":"/path/to/Whatnot.app"}]
-  ```
+- `apps_config` — optional JSON array of app names to shortlist, e.g.
+  `["Whatnot","Settings"]`. Bundle IDs are looked up automatically from
+  whatever's actually installed on the simulator (`simctl listapps`) — you
+  never need to know or paste one. Leave it as `[]` to see every installed
+  app instead of a shortlist.
 - `deeplinks_config` — JSON array of `{ "name", "url" }`. Example:
   ```json
   [{"name":"Home","url":"whatnot://home"}]
