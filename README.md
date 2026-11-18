@@ -1,37 +1,9 @@
 # alfred-device-hub-workflow
 
 Control iOS Simulators from Alfred — create, open, install/launch apps, and fire
-deep links at whichever simulators are currently booted. 
+deep links at whichever simulators are currently booted.
 
-## Keywords
-
-| Keyword     | Does |
-|-------------|------|
-| `simnew`    | Pick a device type + iOS version, creates and boots a new simulator |
-| `simopen`   | Pick any existing simulator, boots it (if needed) and brings it to front |
-| `simapp`    | Pick currently booted simulator(s) (or "All Booted"), then an installed app (optionally shortlisted via `apps_config`), and launches it |
-| `simlink`   | Pick currently booted simulator(s), then a deep link from the `deeplinks_config` workflow variable — or just type a full `scheme://...` URL — and opens it |
-
-`simapp` and `simlink` only ever target simulators that are already booted —
-use `simopen` (or `simnew`) first to get one running.
-
-## Configuring your apps and deep links
-
-Open this workflow in Alfred's workflow editor, click the `[x]` (Workflow
-Variables) icon in the top toolbar, and edit two variables there — no files
-to touch, and the values survive workflow updates:
-
-- `apps_config` — optional JSON array of app names to shortlist, e.g.
-  `["Whatnot","Settings"]`. Bundle IDs are looked up automatically from
-  whatever's actually installed on the simulator (`simctl listapps`) — you
-  never need to know or paste one. Leave it as `[]` to see every installed
-  app instead of a shortlist.
-- `deeplinks_config` — JSON array of `{ "name", "url" }`. Example:
-  ```json
-  [{"name":"Home","url":"whatnot://home"}]
-  ```
-
-## Installing
+## Setup
 
 1. Open this repo's `info.plist` with Alfred (double-click it, or `open info.plist`),
    or clone the whole repo and symlink/copy it into
@@ -39,6 +11,36 @@ to touch, and the values survive workflow updates:
 2. In Alfred's workflow editor, confirm each Script Filter/Run Script object's
    working directory resolves to this repo — Alfred runs scripts with the
    workflow folder as the cwd, so this should just work out of the box.
+
+## Usage
+
+Search device types and iOS versions to create and boot a new simulator via the `simnew` keyword.
+
+Search existing simulators to boot (if needed) and bring one to the front via the `simopen` keyword.
+
+Search installed apps on currently booted simulator(s) and launch one via the `simapp` keyword.
+
+Search deep links configured in the Workflow's Configuration, or type a full `scheme://...` URL, and open it on currently booted simulator(s) via the `simlink` keyword.
+
+`simapp` and `simlink` only ever target simulators that are already booted —
+use `simopen` (or `simnew`) first to get one running.
+
+## Workflow Configuration
+
+Two options are available in this workflow's Configuration sheet (the `[x]`
+icon in Alfred's workflow editor toolbar) — no files to touch, and the values
+survive workflow updates:
+
+- `Apps Shortlist (JSON)` — optional array of app names to shortlist for
+  `simapp`, e.g. `["Whatnot","Settings"]`. Bundle IDs are looked up
+  automatically from whatever's actually installed on the simulator
+  (`simctl listapps`) — you never need to know or paste one. Leave it as `[]`
+  to see every installed app instead of a shortlist.
+- `Deep Links (JSON)` — array of `{ "name", "url" }` used by `simlink`.
+  Example:
+  ```json
+  [{"name":"Home","url":"whatnot://home"}]
+  ```
 
 ## Releasing an update
 

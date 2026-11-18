@@ -8,6 +8,8 @@ import common
 
 
 def main():
+    if not common.ensure_xcrun():
+        return
     booted = common.list_booted_devices()
     if not booted:
         common.alfred_items([common.info_item(

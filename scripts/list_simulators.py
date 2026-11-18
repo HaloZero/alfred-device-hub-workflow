@@ -8,6 +8,8 @@ import common
 
 
 def main():
+    if not common.ensure_xcrun():
+        return
     devices = common.list_devices()
     if not devices:
         common.alfred_items([common.info_item("No simulators found",

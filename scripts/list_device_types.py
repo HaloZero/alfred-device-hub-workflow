@@ -8,6 +8,8 @@ import common
 
 
 def main():
+    if not common.ensure_xcrun():
+        return
     device_types = common.simctl_json("list", "devicetypes")
     runtimes = common.simctl_json("list", "runtimes")
     if not device_types or not runtimes:

@@ -1,16 +1,49 @@
 """Shared helpers for Device Hub's Alfred script filters/actions."""
 import json
+import shutil
 import subprocess
 import sys
 
 
+def xcrun_available():
+    """True if `simctl` actually resolves under the active developer directory.
+
+    `/usr/bin/xcrun` ships with macOS itself and is always on PATH, even with
+    no Xcode or Command Line Tools installed — it just fails when invoked. So
+    checking PATH alone (shutil.which) isn't enough; `xcrun --find` is a
+    lightweight way to probe whether it can actually resolve a real tool.
+    """
+    if shutil.which("xcrun") is None:
+        return False
+    probe = subprocess.run(["xcrun", "--find", "simctl"], capture_output=True, text=True)
+    return probe.returncode == 0
+
+
 def simctl(*args):
+    if not xcrun_available():
+        return subprocess.CompletedProcess(
+            args=["xcrun", "simctl", *args], returncode=127, stdout="", stderr="xcrun not found"
+        )
     result = subprocess.run(
         ["xcrun", "simctl", *args],
         capture_output=True,
         text=True,
     )
     return result
+
+
+def ensure_xcrun():
+    """Emit a clear Alfred result item and return False if `xcrun` is missing,
+    so a Script Filter can bail out early instead of showing a misleading
+    "nothing found" item or crashing with a traceback.
+    """
+    if xcrun_available():
+        return True
+    alfred_items([info_item(
+        "Xcode Command Line Tools not found",
+        "Install Xcode (or run `xcode-select --install`) — this workflow needs `xcrun simctl`.",
+    )])
+    return False
 
 
 def simctl_json(*args):

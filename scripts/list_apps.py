@@ -22,6 +22,8 @@ def resolve_query_udid(target):
 
 
 def main():
+    if not common.ensure_xcrun():
+        return
     target = os.environ.get("target", "")
     target_label = os.environ.get("target_label", "selected simulator(s)")
 

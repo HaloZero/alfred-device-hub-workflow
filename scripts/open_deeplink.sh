@@ -3,6 +3,9 @@
 # target(s): a single udid, or "ALL" booted simulators.
 set -uo pipefail
 
+source "$(dirname "$0")/lib/common.sh"
+require_xcrun
+
 : "${target:?target not set}"
 : "${deeplink_url:?deeplink_url not set}"
 
