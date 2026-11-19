@@ -8,11 +8,11 @@
 	<string>Developer Tools</string>
 	<key>connections</key>
 	<dict>
-		<key>704DBE86-B484-4C2E-905A-E73DA62D9133</key>
+		<key>338DEDED-CA38-4187-A6CB-952D48308DEA</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>A37CE63F-11BF-4BFD-A82D-0ABE3ACEB609</string>
+				<string>2356BA4C-A5DB-4282-B3E3-7C39B5D8EBF1</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -34,24 +34,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>DD161FB6-74E4-4D28-8773-2B7A6D209097</key>
+		<key>704DBE86-B484-4C2E-905A-E73DA62D9133</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>338DEDED-CA38-4187-A6CB-952D48308DEA</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>338DEDED-CA38-4187-A6CB-952D48308DEA</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>2356BA4C-A5DB-4282-B3E3-7C39B5D8EBF1</string>
+				<string>A37CE63F-11BF-4BFD-A82D-0ABE3ACEB609</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -78,6 +65,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>99BCCC43-4F06-45F3-9D89-FC2727AF4895</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>DD161FB6-74E4-4D28-8773-2B7A6D209097</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>338DEDED-CA38-4187-A6CB-952D48308DEA</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -464,38 +464,10 @@ This workflow updates itself via Alfred's built-in GitHub updater — Alfred
 checks this repo's releases automatically.</string>
 	<key>uidata</key>
 	<dict>
-		<key>704DBE86-B484-4C2E-905A-E73DA62D9133</key>
+		<key>2356BA4C-A5DB-4282-B3E3-7C39B5D8EBF1</key>
 		<dict>
 			<key>xpos</key>
-			<integer>40</integer>
-			<key>ypos</key>
-			<integer>20</integer>
-		</dict>
-		<key>A37CE63F-11BF-4BFD-A82D-0ABE3ACEB609</key>
-		<dict>
-			<key>xpos</key>
-			<integer>260</integer>
-			<key>ypos</key>
-			<integer>20</integer>
-		</dict>
-		<key>4909F0BF-F5DC-4416-B5FE-EDCCE8C42AC6</key>
-		<dict>
-			<key>xpos</key>
-			<integer>40</integer>
-			<key>ypos</key>
-			<integer>140</integer>
-		</dict>
-		<key>84F513FA-2AFD-40CC-93B5-BD85718BEC49</key>
-		<dict>
-			<key>xpos</key>
-			<integer>260</integer>
-			<key>ypos</key>
-			<integer>140</integer>
-		</dict>
-		<key>DD161FB6-74E4-4D28-8773-2B7A6D209097</key>
-		<dict>
-			<key>xpos</key>
-			<integer>40</integer>
+			<integer>480</integer>
 			<key>ypos</key>
 			<integer>260</integer>
 		</dict>
@@ -506,24 +478,31 @@ checks this repo's releases automatically.</string>
 			<key>ypos</key>
 			<integer>260</integer>
 		</dict>
-		<key>2356BA4C-A5DB-4282-B3E3-7C39B5D8EBF1</key>
+		<key>4909F0BF-F5DC-4416-B5FE-EDCCE8C42AC6</key>
 		<dict>
 			<key>xpos</key>
-			<integer>480</integer>
+			<integer>40</integer>
 			<key>ypos</key>
+			<integer>140</integer>
+		</dict>
+		<key>704DBE86-B484-4C2E-905A-E73DA62D9133</key>
+		<dict>
+			<key>xpos</key>
+			<integer>40</integer>
+			<key>ypos</key>
+			<integer>20</integer>
+		</dict>
+		<key>84F513FA-2AFD-40CC-93B5-BD85718BEC49</key>
+		<dict>
+			<key>xpos</key>
 			<integer>260</integer>
+			<key>ypos</key>
+			<integer>140</integer>
 		</dict>
 		<key>8785919F-70FC-4FFB-8C5E-DD3431348F35</key>
 		<dict>
 			<key>xpos</key>
 			<integer>40</integer>
-			<key>ypos</key>
-			<integer>380</integer>
-		</dict>
-		<key>C149A98F-56FB-425D-8037-49E07A2389CC</key>
-		<dict>
-			<key>xpos</key>
-			<integer>260</integer>
 			<key>ypos</key>
 			<integer>380</integer>
 		</dict>
@@ -533,6 +512,27 @@ checks this repo's releases automatically.</string>
 			<integer>480</integer>
 			<key>ypos</key>
 			<integer>380</integer>
+		</dict>
+		<key>A37CE63F-11BF-4BFD-A82D-0ABE3ACEB609</key>
+		<dict>
+			<key>xpos</key>
+			<integer>260</integer>
+			<key>ypos</key>
+			<integer>20</integer>
+		</dict>
+		<key>C149A98F-56FB-425D-8037-49E07A2389CC</key>
+		<dict>
+			<key>xpos</key>
+			<integer>260</integer>
+			<key>ypos</key>
+			<integer>380</integer>
+		</dict>
+		<key>DD161FB6-74E4-4D28-8773-2B7A6D209097</key>
+		<dict>
+			<key>xpos</key>
+			<integer>40</integer>
+			<key>ypos</key>
+			<integer>260</integer>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -590,7 +590,7 @@ checks this repo's releases automatically.</string>
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>1.0.2</string>
+	<string>1.0.4</string>
 	<key>webaddress</key>
 	<string>https://github.com/HaloZero/alfred-device-hub-workflow</string>
 </dict>

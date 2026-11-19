@@ -8,9 +8,9 @@ require_xcrun
 : "${udid:?udid not set}"
 
 xcrun simctl boot "$udid" 2>/dev/null
-# -n forces a new `open` launch even if Simulator.app is already running —
-# without it, --args is silently dropped and the already-running instance
-# just gets refocused instead of showing this specific device's window.
-open -n -a Simulator --args -CurrentDeviceUDID "$udid"
+# Xcode 26 replaced Simulator.app with Device Hub. Its `devices://` URL
+# scheme focuses a specific device by UDID even while Device Hub is already
+# running — unlike Simulator.app's `--args`, which a running instance ignored.
+open "devices://device/open?id=$udid"
 
-osascript -e "display notification \"${device_name:-Simulator}\" with title \"Simulator Opened\""
+osascript -e "display notification \"${device_name:-Simulator}\" with title \"Device Hub Opened\""
